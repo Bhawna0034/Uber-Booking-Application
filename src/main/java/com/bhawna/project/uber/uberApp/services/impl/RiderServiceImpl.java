@@ -4,6 +4,7 @@ import com.bhawna.project.uber.uberApp.dto.DriverDto;
 import com.bhawna.project.uber.uberApp.dto.RideDto;
 import com.bhawna.project.uber.uberApp.dto.RideRequestDto;
 import com.bhawna.project.uber.uberApp.dto.RiderDto;
+import com.bhawna.project.uber.uberApp.entities.Driver;
 import com.bhawna.project.uber.uberApp.entities.RideRequest;
 import com.bhawna.project.uber.uberApp.entities.Rider;
 import com.bhawna.project.uber.uberApp.entities.User;
@@ -12,13 +13,11 @@ import com.bhawna.project.uber.uberApp.exceptions.ResourceNotFoundException;
 import com.bhawna.project.uber.uberApp.repositories.RideRequestRepository;
 import com.bhawna.project.uber.uberApp.repositories.RiderRepository;
 import com.bhawna.project.uber.uberApp.services.RiderService;
-import com.bhawna.project.uber.uberApp.strategies.DriverMatchingStrategy;
-import com.bhawna.project.uber.uberApp.strategies.RideFareCalculationStrategy;
 import com.bhawna.project.uber.uberApp.strategies.RideStrategyManager;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,6 +32,7 @@ public class RiderServiceImpl implements RiderService {
     private final RiderRepository riderRepository;
 
     @Override
+    @Transactional
     public RideRequestDto requestRide(RideRequestDto rideRequestDto) {
 
         Rider rider = getCurrentRider();
@@ -44,7 +44,10 @@ public class RiderServiceImpl implements RiderService {
         rideRequest.setFare(fare);
 
         RideRequest savedRideRequest =  rideRequestRepository.save(rideRequest);
-        rideStrategyManager.driverMatchingStrategy(rider.getRating()).findMatchingDriver(rideRequest);
+        List<Driver> drivers = rideStrategyManager
+                .driverMatchingStrategy(rider.getRating()).findMatchingDriver(rideRequest);
+
+        // TODO send notification to all the drivers about this ride request
 
         return modelMapper.map(savedRideRequest, RideRequestDto.class);
     }

@@ -3,6 +3,7 @@ package com.bhawna.project.uber.uberApp.dto;
 import com.bhawna.project.uber.uberApp.entities.enums.PaymentMethod;
 import com.bhawna.project.uber.uberApp.entities.enums.RideStatus;
 import lombok.Data;
+
 import java.time.LocalDateTime;
 
 @Data

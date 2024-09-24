@@ -5,7 +5,6 @@ import com.bhawna.project.uber.uberApp.strategies.impl.DriverMatchingNearestDriv
 import com.bhawna.project.uber.uberApp.strategies.impl.RideFareDefaultFareCalculationStrategy;
 import com.bhawna.project.uber.uberApp.strategies.impl.RideFareSurgePricingFareCalculationStrategy;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
@@ -31,7 +30,7 @@ public class RideStrategyManager {
 
     public RideFareCalculationStrategy rideFareCalculationStrategy(){
 
-    // 6 PM to 9 PM
+    // 6 PM to 9 PM is SURGE TIME
 
         LocalTime surgeStartTime = LocalTime.of(18, 0);
         LocalTime surgeEndTime = LocalTime.of(21, 0);

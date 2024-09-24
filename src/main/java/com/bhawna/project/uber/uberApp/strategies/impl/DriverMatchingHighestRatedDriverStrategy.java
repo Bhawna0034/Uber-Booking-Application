@@ -4,6 +4,7 @@ import com.bhawna.project.uber.uberApp.entities.Driver;
 import com.bhawna.project.uber.uberApp.entities.RideRequest;
 import com.bhawna.project.uber.uberApp.repositories.DriverRepository;
 import com.bhawna.project.uber.uberApp.strategies.DriverMatchingStrategy;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional()
 public class DriverMatchingHighestRatedDriverStrategy implements DriverMatchingStrategy {
 
     private final DriverRepository driverRepository;

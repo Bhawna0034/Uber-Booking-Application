@@ -3,7 +3,6 @@ package com.bhawna.project.uber.uberApp.services.impl;
 import com.bhawna.project.uber.uberApp.dto.DriverDto;
 import com.bhawna.project.uber.uberApp.dto.SignupDto;
 import com.bhawna.project.uber.uberApp.dto.UserDto;
-import com.bhawna.project.uber.uberApp.entities.Rider;
 import com.bhawna.project.uber.uberApp.entities.User;
 import com.bhawna.project.uber.uberApp.entities.enums.Role;
 import com.bhawna.project.uber.uberApp.exceptions.RuntimeConflictException;
